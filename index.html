@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Librerías Andinas</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f5f7fa;
+      color: #222;
+    }
+
+    header {
+      background: #b71c1c;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 32px;
+      margin-bottom: 5px;
+    }
+
+    nav {
+      background: #8e0000;
+      padding: 12px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      padding: 60px 20px;
+      text-align: center;
+      background: linear-gradient(135deg, #fff3e0, #ffffff);
+    }
+
+    .hero h2 {
+      color: #b71c1c;
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .boton {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 22px;
+      background: #25d366;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    section {
+      padding: 45px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    section h2 {
+      text-align: center;
+      color: #b71c1c;
+      margin-bottom: 30px;
+    }
+
+    .productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .producto {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .producto h3 {
+      color: #b71c1c;
+      margin-bottom: 10px;
+    }
+
+    .contacto {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+    }
+
+    form input,
+    form textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0 15px;
+      border: 1px solid #ccc;
+      border-radius: 7px;
+    }
+
+    form button {
+      border: none;
+      background: #b71c1c;
+      color: white;
+      padding: 13px 20px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    /* CHATBOT */
+
+    #chatbot-button {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 60px;
+      height: 60px;
+      background: #b71c1c;
+      color: white;
+      border-radius: 50%;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    #chatbot {
+      display: none;
+      position: fixed;
+      right: 20px;
+      bottom: 90px;
+      width: 350px;
+      max-height: 520px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+      overflow: hidden;
+      z-index: 1000;
+    }
+
+    .chat-header {
+      background: #b71c1c;
+      color: white;
+      padding: 15px;
+      font-weight: bold;
+    }
+
+    #chat-messages {
+      height: 300px;
+      overflow-y: auto;
+      padding: 15px;
+      background: #fafafa;
+    }
+
+    .mensaje-bot,
+    .mensaje-user {
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      max-width: 85%;
+    }
+
+    .mensaje-bot {
+      background: #eeeeee;
+    }
+
+    .mensaje-user {
+      background: #dcedc8;
+      margin-left: auto;
+    }
+
+    .preguntas {
+      padding: 10px;
+      max-height: 160px;
+      overflow-y: auto;
+    }
+
+    .preguntas button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 8px;
+      margin-bottom: 5px;
+      border: none;
+      background: #f2f2f2;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .preguntas button:hover {
+      background: #ffe0e0;
+    }
+
+    @media (max-width: 480px) {
+      #chatbot {
+        width: calc(100% - 30px);
+        right: 15px;
+      }
+
+      .hero h2 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Librerías Andinas</h1>
+  <p>Útiles escolares, oficina y más</p>
+</header>
+
+<nav>
+  <a href="#inicio">Inicio</a>
+  <a href="#productos">Productos</a>
+  <a href="#contacto">Contacto</a>
+</nav>
+
+<section class="hero" id="inicio">
+  <h2>Todo lo que necesitas en un solo lugar</h2>
+
+  <p>
+    En Librerías Andinas ofrecemos útiles escolares, artículos de oficina,
+    cuadernos, lapiceros, mochilas y muchos productos más.
+  </p>
+
+  <a
+    class="boton"
+    href="https://wa.me/51992093538?text=Hola%20Librer%C3%ADas%20Andinas,%20quiero%20realizar%20una%20consulta."
+    target="_blank"
+  >
+    Consultar por WhatsApp
+  </a>
+</section>
+
+<section id="productos">
+
+  <h2>Nuestros productos</h2>
+
+  <div class="productos">
+
+    <div class="producto">
+      <h3>Útiles escolares</h3>
+      <p>Cuadernos, colores, reglas, plumones, lápices y mucho más.</p>
+    </div>
+
+    <div class="producto">
+      <h3>Artículos de oficina</h3>
+      <p>Archivadores, papel, lapiceros, sobres, folders y accesorios.</p>
+    </div>
+
+    <div class="producto">
+      <h3>Mochilas</h3>
+      <p>Mochilas escolares para niños, jóvenes y adultos.</p>
+    </div>
+
+    <div class="producto">
+      <h3>Listas escolares</h3>
+      <p>Te ayudamos a preparar listas completas de útiles escolares.</p>
+    </div>
+
+  </div>
+</section>
+
+<section id="contacto">
+
+  <h2>Contáctanos</h2>
+
+  <div class="contacto">
+
+    <form onsubmit="enviarFormulario(event)">
+
+      <label>Nombre:</label>
+      <input type="text" id="nombre" required>
+
+      <label>Teléfono:</label>
+      <input type="tel" id="telefono" required>
+
+      <label>Correo:</label>
+      <input type="email" id="correo">
+
+      <label>Mensaje:</label>
+      <textarea id="mensaje" rows="5" required></textarea>
+
+      <button type="submit">
+        Enviar consulta
+      </button>
+
+    </form>
+
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Librerías Andinas</p>
+  <p>WhatsApp: 992 093 538</p>
+  <p>Correo: guerrapyuri@gmail.com</p>
+</footer>
+
+
+<!-- BOTÓN CHAT -->
+
+<button id="chatbot-button" onclick="abrirChat()">💬</button>
+
+
+<!-- CHATBOT -->
+
+<div id="chatbot">
+
+  <div class="chat-header">
+    Asistente de Librerías Andinas
+  </div>
+
+  <div id="chat-messages">
+    <div class="mensaje-bot">
+      ¡Hola! 👋 Soy el asistente de Librerías Andinas.
+      Selecciona una pregunta para ayudarte.
+    </div>
+  </div>
+
+  <div class="preguntas">
+
+    <button onclick="responder(1)">
+      1. ¿Qué productos venden?
+    </button>
+
+    <button onclick="responder(2)">
+      2. ¿Cuál es su horario?
+    </button>
+
+    <button onclick="responder(3)">
+      3. ¿Realizan delivery?
+    </button>
+
+    <button onclick="responder(4)">
+      4. ¿Qué métodos de pago aceptan?
+    </button>
+
+    <button onclick="responder(5)">
+      5. ¿Venden útiles escolares?
+    </button>
+
+    <button onclick="responder(6)">
+      6. ¿Venden productos de oficina?
+    </button>
+
+    <button onclick="responder(7)">
+      7. ¿Preparan listas escolares?
+    </button>
+
+    <button onclick="responder(8)">
+      8. ¿Entregan boleta o factura?
+    </button>
+
+    <button onclick="responder(9)">
+      9. ¿Dónde están ubicados?
+    </button>
+
+    <button onclick="responder(10)">
+      10. ¿Cómo puedo hacer un pedido?
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+function abrirChat() {
+
+  const chat = document.getElementById("chatbot");
+
+  if (chat.style.display === "block") {
+    chat.style.display = "none";
+  } else {
+    chat.style.display = "block";
+  }
+
+}
+
+
+function agregarMensaje(texto, tipo) {
+
+  const contenedor = document.getElementById("chat-messages");
+
+  const mensaje = document.createElement("div");
+
+  mensaje.className =
+    tipo === "bot" ? "mensaje-bot" : "mensaje-user";
+
+  mensaje.innerHTML = texto;
+
+  contenedor.appendChild(mensaje);
+
+  contenedor.scrollTop = contenedor.scrollHeight;
+
+}
+
+
+function responder(numero) {
+
+  const preguntas = {
+
+    1: {
+      pregunta: "¿Qué productos venden?",
+      respuesta:
+        "Vendemos útiles escolares, cuadernos, lapiceros, colores, plumones, artículos de oficina, papel, folders, mochilas y otros productos de librería."
+    },
+
+    2: {
+      pregunta: "¿Cuál es su horario?",
+      respuesta:
+        "Nuestro horario de atención es de lunes a sábado. Puedes consultar el horario exacto mediante nuestro WhatsApp."
+    },
+
+    3: {
+      pregunta: "¿Realizan delivery?",
+      respuesta:
+        "Sí. Podemos coordinar entregas dependiendo de la ubicación y disponibilidad."
+    },
+
+    4: {
+      pregunta: "¿Qué métodos de pago aceptan?",
+      respuesta:
+        "Aceptamos pagos en efectivo y podemos coordinar otros métodos de pago directamente con el cliente."
+    },
+
+    5: {
+      pregunta: "¿Venden útiles escolares?",
+      respuesta:
+        "Sí. Contamos con cuadernos, lápices, lapiceros, colores, reglas, plumones y otros útiles escolares."
+    },
+
+    6: {
+      pregunta: "¿Venden productos de oficina?",
+      respuesta:
+        "Sí. Tenemos papel, folders, archivadores, sobres, lapiceros y diversos artículos de oficina."
+    },
+
+    7: {
+      pregunta: "¿Preparan listas escolares?",
+      respuesta:
+        "Sí. Puedes enviarnos la lista escolar y te ayudaremos a preparar los productos disponibles."
+    },
+
+    8: {
+      pregunta: "¿Entregan boleta o factura?",
+      respuesta:
+        "Puedes consultar sobre la emisión de comprobantes al momento de realizar tu pedido."
+    },
+
+    9: {
+      pregunta: "¿Dónde están ubicados?",
+      respuesta:
+        "Para conocer nuestra ubicación exacta, comunícate con nosotros por WhatsApp al 992 093 538."
+    },
+
+    10: {
+      pregunta: "¿Cómo puedo hacer un pedido?",
+      respuesta:
+        "Puedes realizar tu pedido directamente mediante WhatsApp haciendo clic en el siguiente enlace:<br><br>" +
+        '<a href="https://wa.me/51992093538?text=Hola%20Librer%C3%ADas%20Andinas,%20quiero%20hacer%20un%20pedido." target="_blank">Hacer pedido por WhatsApp</a>'
+    }
+
+  };
+
+
+  const item = preguntas[numero];
+
+  agregarMensaje(item.pregunta, "user");
+
+  setTimeout(function() {
+
+    agregarMensaje(item.respuesta, "bot");
+
+  }, 300);
+
+}
+
+
+function enviarFormulario(event) {
+
+  event.preventDefault();
+
+  const nombre =
+    document.getElementById("nombre").value;
+
+  const telefono =
+    document.getElementById("telefono").value;
+
+  const correo =
+    document.getElementById("correo").value;
+
+  const mensaje =
+    document.getElementById("mensaje").value;
+
+
+  const textoWhatsApp =
+    "Hola Librerías Andinas.%0A%0A" +
+    "Nueva consulta desde la página web:%0A%0A" +
+    "Nombre: " + encodeURIComponent(nombre) + "%0A" +
+    "Teléfono: " + encodeURIComponent(telefono) + "%0A" +
+    "Correo: " + encodeURIComponent(correo) + "%0A" +
+    "Mensaje: " + encodeURIComponent(mensaje);
+
+
+  const whatsapp =
+    "https://wa.me/51992093538?text=" + textoWhatsApp;
+
+
+  window.open(whatsapp, "_blank");
+
+
+  const asunto =
+    encodeURIComponent("Consulta desde Librerías Andinas");
+
+  const cuerpo =
+    encodeURIComponent(
+      "Nombre: " + nombre + "\n" +
+      "Teléfono: " + telefono + "\n" +
+      "Correo: " + correo + "\n\n" +
+      "Mensaje:\n" + mensaje
+    );
+
+
+  const email =
+    "mailto:guerrapyuri@gmail.com" +
+    "?subject=" + asunto +
+    "&body=" + cuerpo;
+
+
+  setTimeout(function() {
+
+    window.location.href = email;
+
+  }, 700);
+
+}
+
+</script>
+
+</body>
+</html>
