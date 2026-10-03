@@ -1,579 +1,422 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-PE">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Librerías Andinas</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      background: #f5f7fa;
-      color: #222;
-    }
-
-    header {
-      background: #b71c1c;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-
-    header h1 {
-      font-size: 32px;
-      margin-bottom: 5px;
-    }
-
-    nav {
-      background: #8e0000;
-      padding: 12px;
-      text-align: center;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    .hero {
-      padding: 60px 20px;
-      text-align: center;
-      background: linear-gradient(135deg, #fff3e0, #ffffff);
-    }
-
-    .hero h2 {
-      color: #b71c1c;
-      font-size: 36px;
-      margin-bottom: 15px;
-    }
-
-    .hero p {
-      font-size: 18px;
-      max-width: 700px;
-      margin: auto;
-    }
-
-    .boton {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 22px;
-      background: #25d366;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-    }
-
-    section {
-      padding: 45px 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    section h2 {
-      text-align: center;
-      color: #b71c1c;
-      margin-bottom: 30px;
-    }
-
-    .productos {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-
-    .producto {
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-
-    .producto h3 {
-      color: #b71c1c;
-      margin-bottom: 10px;
-    }
-
-    .contacto {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
-    }
-
-    form input,
-    form textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0 15px;
-      border: 1px solid #ccc;
-      border-radius: 7px;
-    }
-
-    form button {
-      border: none;
-      background: #b71c1c;
-      color: white;
-      padding: 13px 20px;
-      border-radius: 7px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    footer {
-      background: #222;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-    }
-
-    /* CHATBOT */
-
-    #chatbot-button {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      width: 60px;
-      height: 60px;
-      background: #b71c1c;
-      color: white;
-      border-radius: 50%;
-      border: none;
-      font-size: 28px;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }
-
-    #chatbot {
-      display: none;
-      position: fixed;
-      right: 20px;
-      bottom: 90px;
-      width: 350px;
-      max-height: 520px;
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 5px 25px rgba(0,0,0,0.3);
-      overflow: hidden;
-      z-index: 1000;
-    }
-
-    .chat-header {
-      background: #b71c1c;
-      color: white;
-      padding: 15px;
-      font-weight: bold;
-    }
-
-    #chat-messages {
-      height: 300px;
-      overflow-y: auto;
-      padding: 15px;
-      background: #fafafa;
-    }
-
-    .mensaje-bot,
-    .mensaje-user {
-      margin-bottom: 10px;
-      padding: 10px;
-      border-radius: 10px;
-      max-width: 85%;
-    }
-
-    .mensaje-bot {
-      background: #eeeeee;
-    }
-
-    .mensaje-user {
-      background: #dcedc8;
-      margin-left: auto;
-    }
-
-    .preguntas {
-      padding: 10px;
-      max-height: 160px;
-      overflow-y: auto;
-    }
-
-    .preguntas button {
-      display: block;
-      width: 100%;
-      text-align: left;
-      padding: 8px;
-      margin-bottom: 5px;
-      border: none;
-      background: #f2f2f2;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-
-    .preguntas button:hover {
-      background: #ffe0e0;
-    }
-
-    @media (max-width: 480px) {
-      #chatbot {
-        width: calc(100% - 30px);
-        right: 15px;
-      }
-
-      .hero h2 {
-        font-size: 28px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-<header>
-  <h1>Librerías Andinas</h1>
-  <p>Útiles escolares, oficina y más</p>
-</header>
-
-<nav>
-  <a href="#inicio">Inicio</a>
-  <a href="#productos">Productos</a>
-  <a href="#contacto">Contacto</a>
-</nav>
-
-<section class="hero" id="inicio">
-  <h2>Todo lo que necesitas en un solo lugar</h2>
-
-  <p>
-    En Librerías Andinas ofrecemos útiles escolares, artículos de oficina,
-    cuadernos, lapiceros, mochilas y muchos productos más.
-  </p>
-
-  <a
-    class="boton"
-    href="https://wa.me/51992093538?text=Hola%20Librer%C3%ADas%20Andinas,%20quiero%20realizar%20una%20consulta."
-    target="_blank"
-  >
-    Consultar por WhatsApp
-  </a>
-</section>
-
-<section id="productos">
-
-  <h2>Nuestros productos</h2>
-
-  <div class="productos">
-
-    <div class="producto">
-      <h3>Útiles escolares</h3>
-      <p>Cuadernos, colores, reglas, plumones, lápices y mucho más.</p>
-    </div>
-
-    <div class="producto">
-      <h3>Artículos de oficina</h3>
-      <p>Archivadores, papel, lapiceros, sobres, folders y accesorios.</p>
-    </div>
-
-    <div class="producto">
-      <h3>Mochilas</h3>
-      <p>Mochilas escolares para niños, jóvenes y adultos.</p>
-    </div>
-
-    <div class="producto">
-      <h3>Listas escolares</h3>
-      <p>Te ayudamos a preparar listas completas de útiles escolares.</p>
-    </div>
-
-  </div>
-</section>
-
-<section id="contacto">
-
-  <h2>Contáctanos</h2>
-
-  <div class="contacto">
-
-    <form onsubmit="enviarFormulario(event)">
-
-      <label>Nombre:</label>
-      <input type="text" id="nombre" required>
-
-      <label>Teléfono:</label>
-      <input type="tel" id="telefono" required>
-
-      <label>Correo:</label>
-      <input type="email" id="correo">
-
-      <label>Mensaje:</label>
-      <textarea id="mensaje" rows="5" required></textarea>
-
-      <button type="submit">
-        Enviar consulta
-      </button>
-
-    </form>
-
-  </div>
-</section>
-
-<footer>
-  <p>© 2026 Librerías Andinas</p>
-  <p>WhatsApp: 992 093 538</p>
-  <p>Correo: guerrapyuri@gmail.com</p>
-</footer>
-
-
-<!-- BOTÓN CHAT -->
-
-<button id="chatbot-button" onclick="abrirChat()">💬</button>
-
-
-<!-- CHATBOT -->
-
-<div id="chatbot">
-
-  <div class="chat-header">
-    Asistente de Librerías Andinas
-  </div>
-
-  <div id="chat-messages">
-    <div class="mensaje-bot">
-      ¡Hola! 👋 Soy el asistente de Librerías Andinas.
-      Selecciona una pregunta para ayudarte.
-    </div>
-  </div>
-
-  <div class="preguntas">
-
-    <button onclick="responder(1)">
-      1. ¿Qué productos venden?
-    </button>
-
-    <button onclick="responder(2)">
-      2. ¿Cuál es su horario?
-    </button>
-
-    <button onclick="responder(3)">
-      3. ¿Realizan delivery?
-    </button>
-
-    <button onclick="responder(4)">
-      4. ¿Qué métodos de pago aceptan?
-    </button>
-
-    <button onclick="responder(5)">
-      5. ¿Venden útiles escolares?
-    </button>
-
-    <button onclick="responder(6)">
-      6. ¿Venden productos de oficina?
-    </button>
-
-    <button onclick="responder(7)">
-      7. ¿Preparan listas escolares?
-    </button>
-
-    <button onclick="responder(8)">
-      8. ¿Entregan boleta o factura?
-    </button>
-
-    <button onclick="responder(9)">
-      9. ¿Dónde están ubicados?
-    </button>
-
-    <button onclick="responder(10)">
-      10. ¿Cómo puedo hacer un pedido?
-    </button>
-
-  </div>
-
-</div>
-
-
-<script>
-
-function abrirChat() {
-
-  const chat = document.getElementById("chatbot");
-
-  if (chat.style.display === "block") {
-    chat.style.display = "none";
-  } else {
-    chat.style.display = "block";
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Librerías Andinas OnLine | Libros con envío a todo el Perú</title>
+<meta name="description" content="Librerías Andinas OnLine: literatura peruana, textos escolares, universitarios e infantiles con envío a todo el Perú.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,500;0,700;0,800;1,500&family=Alegreya+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet">
+<style>
+  :root{
+    --morado:#3B1F4A;      /* chicha morada */
+    --morado-2:#52305F;
+    --azafran:#E8A33D;     /* hilo azafrán */
+    --magenta:#C2185B;     /* cochinilla */
+    --turquesa:#1F7A6E;    /* laguna altoandina */
+    --papel:#FBFAF7;
+    --tinta:#231628;
+    --gris:#6B5F70;
+    --borde:#E6E0EA;
+    --serif:"Alegreya", Georgia, "Times New Roman", serif;
+    --sans:"Alegreya Sans", "Segoe UI", Roboto, Arial, sans-serif;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
   }
-
+  *,*::before,*::after{box-sizing:inherit}
+  html{scroll-behavior:smooth;scroll-padding-top:80px}
+  body{margin:0;font-family:var(--sans);font-size:1.1rem;line-height:1.6;color:var(--tinta);background:var(--papel)}
+  img{max-width:100%}
+  a{color:var(--turquesa)}
+  :focus-visible{outline:3px solid var(--azafran);outline-offset:2px}
+  .contenedor{width:min(1120px,100% - 2.5rem);margin-inline:auto}
+ 
+  /* Franja tejida: el elemento memorable de la página */
+  .tejido{
+    height:22px;
+    background:
+      linear-gradient(135deg,var(--magenta) 25%,transparent 25%) 0 0/22px 22px,
+      linear-gradient(225deg,var(--magenta) 25%,transparent 25%) 0 0/22px 22px,
+      linear-gradient(315deg,var(--azafran) 25%,transparent 25%) 11px 0/22px 22px,
+      linear-gradient(45deg,var(--azafran) 25%,transparent 25%) 11px 0/22px 22px,
+      var(--turquesa);
+  }
+ 
+  /* Encabezado */
+  header{position:sticky;top:0;z-index:20;background:var(--morado);color:#fff}
+  .barra{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 0}
+  .logo{display:flex;align-items:center;gap:.6rem;color:#fff;text-decoration:none;font-family:var(--serif);font-weight:800;font-size:1.35rem;line-height:1.1}
+  .logo small{display:block;font-family:var(--sans);font-weight:500;font-size:.8rem;color:var(--azafran)}
+  .logo svg{flex:none}
+  nav ul{display:flex;gap:1.4rem;list-style:none;margin:0;padding:0}
+  nav a{color:#fff;text-decoration:none;font-weight:500}
+  nav a:hover{color:var(--azafran)}
+  .menu-btn{display:none;background:none;border:1px solid rgba(255,255,255,.4);color:#fff;border-radius:6px;padding:.35rem .7rem;font:inherit;cursor:pointer}
+ 
+  /* Portada */
+  .portada{background:var(--morado);color:#fff;padding:4.5rem 0 5rem;position:relative;overflow:hidden}
+  .portada .contenedor{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:center}
+  .portada h1{font-family:var(--serif);font-weight:800;font-size:clamp(2.4rem,5.5vw,4.2rem);line-height:1.02;margin:0 0 1.2rem;letter-spacing:-.01em}
+  .portada p{font-size:1.25rem;max-width:34ch;color:#EADFF0;margin:0 0 2rem}
+  .acciones{display:flex;flex-wrap:wrap;gap:.8rem}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.4rem;border-radius:999px;font:700 1rem var(--sans);text-decoration:none;border:2px solid transparent;cursor:pointer}
+  .btn-azafran{background:var(--azafran);color:var(--tinta)}
+  .btn-azafran:hover{background:#F2B65A}
+  .btn-borde{border-color:#fff;color:#fff;background:transparent}
+  .btn-borde:hover{background:rgba(255,255,255,.1)}
+  /* Pila de libros ilustrada */
+  .pila{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .lomo{height:46px;border-radius:4px;display:flex;align-items:center;padding:0 1rem;font-family:var(--serif);font-weight:700;color:#fff;font-size:1.05rem;box-shadow:inset 0 -4px 0 rgba(0,0,0,.18)}
+  .lomo:nth-child(1){width:78%;background:var(--magenta);transform:translateX(-12px)}
+  .lomo:nth-child(2){width:88%;background:var(--turquesa)}
+  .lomo:nth-child(3){width:70%;background:var(--azafran);color:var(--tinta);transform:translateX(18px)}
+  .lomo:nth-child(4){width:92%;background:#fff;color:var(--morado);transform:translateX(-6px)}
+  .lomo:nth-child(5){width:82%;background:var(--magenta);transform:translateX(10px)}
+ 
+  section{padding:4.5rem 0}
+  h2{font-family:var(--serif);font-weight:800;font-size:clamp(1.9rem,3.5vw,2.6rem);line-height:1.1;margin:0 0 .6rem;color:var(--morado)}
+  .intro{color:var(--gris);max-width:60ch;margin:0 0 2.5rem}
+ 
+  /* Categorías */
+  .categorias{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:3px solid var(--morado)}
+  .cat{padding:1.6rem 1.4rem 1.8rem;border-right:1px solid var(--borde)}
+  .cat:last-child{border-right:none}
+  .cat h3{font-family:var(--serif);font-size:1.35rem;margin:.6rem 0 .4rem}
+  .cat p{margin:0;color:var(--gris);font-size:1rem}
+  .punto{width:14px;height:14px;transform:rotate(45deg);display:inline-block}
+ 
+  /* Destacados */
+  .destacados{background:#F3EEF5}
+  .libros{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.6rem}
+  .libro{background:#fff;border-radius:4px;overflow:hidden;display:flex;flex-direction:column}
+  .tapa{aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;padding:1.1rem;color:#fff;font-family:var(--serif)}
+  .tapa strong{font-size:1.35rem;line-height:1.1}
+  .tapa span{font-family:var(--sans);font-size:.9rem;opacity:.85;margin-top:.3rem}
+  .libro-info{padding:1rem 1.1rem 1.2rem;display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex:1}
+  .precio{font-weight:700;font-size:1.15rem;color:var(--morado)}
+  .pedir{background:var(--turquesa);color:#fff;border:none;border-radius:999px;padding:.5rem .9rem;font:700 .9rem var(--sans);cursor:pointer}
+  .pedir:hover{background:#186358}
+ 
+  /* Ventajas */
+  .ventajas{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}
+  .ventaja h3{font-family:var(--serif);font-size:1.4rem;margin:0 0 .4rem;color:var(--tinta)}
+  .ventaja p{margin:0;color:var(--gris)}
+  .ventaja::before{content:"";display:block;width:48px;height:6px;background:var(--azafran);margin-bottom:1rem}
+  .ventaja:nth-child(2)::before{background:var(--magenta)}
+  .ventaja:nth-child(3)::before{background:var(--turquesa)}
+ 
+  /* Contacto */
+  .contacto{background:var(--morado);color:#fff}
+  .contacto h2{color:#fff}
+  .contacto .intro{color:#EADFF0}
+  .contacto-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:3rem}
+  .datos p{margin:0 0 1rem}
+  .datos a{color:var(--azafran)}
+  form label{display:block;font-weight:500;margin-bottom:.3rem}
+  form input,form textarea{width:100%;padding:.75rem .9rem;border-radius:6px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff;font:inherit;margin-bottom:1rem}
+  form input::placeholder,form textarea::placeholder{color:#C9B8D2}
+  .aviso{min-height:1.5rem;font-weight:500;color:var(--azafran)}
+ 
+  footer{background:var(--tinta);color:#C9B8D2;padding:2rem 0;font-size:.95rem}
+  footer .contenedor{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
+ 
+  /* ====== CHATBOT n8n ====== */
+  :root{
+    --chat--color-primary:#C2185B;
+    --chat--color-primary-shade-50:#A3144C;
+    --chat--color-primary-shade-100:#8A1141;
+    --chat--color-secondary:#1F7A6E;
+    --chat--color-secondary-shade-50:#186358;
+    --chat--color-white:#ffffff;
+    --chat--color-light:#F7F4F9;
+    --chat--color-light-shade-50:#E6E0EA;
+    --chat--color-light-shade-100:#C9B8D2;
+    --chat--color-medium:#D2C6D8;
+    --chat--color-dark:#231628;
+    --chat--color-disabled:#6B5F70;
+    --chat--color-typing:#6B5F70;
+    --chat--font-family:"Alegreya Sans","Segoe UI",Roboto,Arial,sans-serif;
+    --chat--border-radius:14px;
+    --chat--window--width:380px;
+    --chat--window--height:580px;
+    --chat--header--background:#3B1F4A;
+    --chat--header--color:#ffffff;
+    --chat--heading--font-size:1.3em;
+    --chat--subtitle--line-height:1.4;
+    --chat--message--font-size:0.98rem;
+    --chat--message--bot--background:#ffffff;
+    --chat--message--bot--color:#231628;
+    --chat--message--user--background:#1F7A6E;
+    --chat--message--user--color:#ffffff;
+    --chat--toggle--size:64px;
+    --chat--toggle--background:#C2185B;
+    --chat--toggle--hover--background:#A3144C;
+    --chat--toggle--active--background:#8A1141;
+    --chat--toggle--color:#ffffff;
+  }
+  /* Emoji de chatbot en el botón flotante */
+  .chat-window-wrapper .chat-window-toggle{box-shadow:0 8px 24px rgba(59,31,74,.35)}
+  .chat-window-wrapper .chat-window-toggle svg{display:none}
+  .chat-window-wrapper .chat-window-toggle::before{content:"🤖";font-size:34px;line-height:1}
+  .chat-window-wrapper .chat-header h1::before{content:"🤖 "}
+  .chat-globo{position:fixed;right:96px;bottom:calc(34px + env(safe-area-inset-bottom,0px));z-index:9999;background:#fff;color:var(--tinta);padding:.5rem .8rem;border-radius:10px;white-space:nowrap;font-size:.95rem;font-weight:500;box-shadow:0 4px 14px rgba(0,0,0,.15);cursor:pointer}
+  .chat-globo::after{content:"";position:absolute;right:-6px;top:50%;width:12px;height:12px;background:#fff;transform:translateY(-50%) rotate(45deg)}
+ 
+  @media (max-width:860px){
+    .portada .contenedor,.contacto-grid{grid-template-columns:1fr}
+    .pila{display:none}
+    .categorias{grid-template-columns:1fr 1fr}
+    .cat:nth-child(2){border-right:none}
+    .cat{border-bottom:1px solid var(--borde)}
+    .ventajas{grid-template-columns:1fr}
+    nav ul{display:none;position:absolute;left:0;right:0;top:100%;background:var(--morado);flex-direction:column;padding:1rem 1.25rem;gap:.9rem}
+    nav ul.visible{display:flex}
+    .menu-btn{display:block}
+    .chat-globo{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+ 
+<header>
+  <div class="contenedor barra">
+    <a href="#inicio" class="logo" aria-label="Librerías Andinas OnLine, inicio">
+      <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M2 34 L14 12 L21 22 L27 14 L38 34 Z" fill="#E8A33D"/>
+        <path d="M14 12 L18 19 L16 19 L14 16 L12 19 L10 19 Z" fill="#fff"/>
+        <rect x="8" y="30" width="24" height="6" rx="1" fill="#C2185B"/>
+      </svg>
+      <span>Librerías Andinas<small>OnLine · Perú</small></span>
+    </a>
+    <nav>
+      <button class="menu-btn" aria-expanded="false" aria-controls="menu" id="menuBtn">Menú</button>
+      <ul id="menu">
+        <li><a href="#categorias">Categorías</a></li>
+        <li><a href="#destacados">Libros</a></li>
+        <li><a href="#ventajas">Envíos y pagos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="tejido" aria-hidden="true"></div>
+ 
+<main id="inicio">
+  <section class="portada">
+    <div class="contenedor">
+      <div>
+        <h1>Libros que viajan desde los Andes hasta tu puerta</h1>
+        <p>Literatura peruana, textos escolares y universitarios con envío a todo el Perú. Pide por WhatsApp y paga con Yape o Plin.</p>
+        <div class="acciones">
+          <a class="btn btn-azafran" href="https://wa.me/51992093538?text=Hola%20Librer%C3%ADas%20Andinas%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+          <button class="btn btn-borde" type="button" onclick="abrirChat()">Hacer una consulta</button>
+        </div>
+      </div>
+      <div class="pila" aria-hidden="true">
+        <div class="lomo">Los ríos profundos</div>
+        <div class="lomo">La ciudad y los perros</div>
+        <div class="lomo">Paco Yunque</div>
+        <div class="lomo">Tradiciones peruanas</div>
+        <div class="lomo">El mundo es ancho y ajeno</div>
+      </div>
+    </div>
+  </section>
+ 
+  <section id="categorias">
+    <div class="contenedor">
+      <h2>¿Qué estás buscando?</h2>
+      <p class="intro">Trabajamos con editoriales nacionales e internacionales. Si no encuentras un título, te lo conseguimos.</p>
+      <div class="categorias">
+        <div class="cat"><span class="punto" style="background:var(--magenta)"></span><h3>Literatura peruana</h3><p>Vallejo, Arguedas, Vargas Llosa, Ribeyro y autores nuevos de regiones.</p></div>
+        <div class="cat"><span class="punto" style="background:var(--azafran)"></span><h3>Escolar</h3><p>Plan lector, textos de inicial, primaria y secundaria según tu lista.</p></div>
+        <div class="cat"><span class="punto" style="background:var(--turquesa)"></span><h3>Universitario</h3><p>Derecho, medicina, ingeniería, contabilidad y preuniversitarios.</p></div>
+        <div class="cat"><span class="punto" style="background:var(--morado)"></span><h3>Infantil</h3><p>Cuentos, leyendas andinas y libros para colorear y aprender.</p></div>
+      </div>
+    </div>
+  </section>
+ 
+  <section id="destacados" class="destacados">
+    <div class="contenedor">
+      <h2>Libros destacados</h2>
+      <p class="intro">Precios referenciales en soles. Consulta stock y descuentos por cantidad.</p>
+      <div class="libros" id="listaLibros"></div>
+    </div>
+  </section>
+ 
+  <section id="ventajas">
+    <div class="contenedor">
+      <h2>Comprar con nosotros es sencillo</h2>
+      <p class="intro">Atendemos pedidos desde Huacho para todo el país.</p>
+      <div class="ventajas">
+        <div class="ventaja"><h3>Envíos a todo el Perú</h3><p>Lima en 24 a 48 horas y provincias en 2 a 5 días hábiles por agencia o courier.</p></div>
+        <div class="ventaja"><h3>Paga como prefieras</h3><p>Yape, Plin, transferencia bancaria, tarjeta o pago contra entrega en zonas seleccionadas.</p></div>
+        <div class="ventaja"><h3>Atención por WhatsApp</h3><p>Te asesoramos con tu lista escolar o el libro que necesitas, de lunes a sábado.</p></div>
+      </div>
+    </div>
+  </section>
+ 
+  <section id="contacto" class="contacto">
+    <div class="contenedor contacto-grid">
+      <div class="datos">
+        <h2>Escríbenos</h2>
+        <p class="intro">Responderemos tu mensaje por WhatsApp o correo el mismo día.</p>
+        <p><strong>WhatsApp:</strong> <a href="https://wa.me/51992093538" target="_blank" rel="noopener">992 093 538</a></p>
+        <p><strong>Correo:</strong> <a href="mailto:yuriguerra123p@gmail.com">yuriguerra123p@gmail.com</a></p>
+        <p><strong>Horario:</strong> lunes a sábado, de 9:00 a. m. a 7:00 p. m.</p>
+      </div>
+      <form id="formContacto" novalidate>
+        <label for="fNombre">Nombre</label>
+        <input id="fNombre" name="nombre" required placeholder="Tu nombre completo">
+        <label for="fTel">Celular</label>
+        <input id="fTel" name="celular" type="tel" required placeholder="9XX XXX XXX">
+        <label for="fCorreo">Correo electrónico</label>
+        <input id="fCorreo" name="correo" type="email" placeholder="tucorreo@ejemplo.com">
+        <label for="fMsg">Mensaje</label>
+        <textarea id="fMsg" name="mensaje" rows="4" required placeholder="¿Qué libro buscas?"></textarea>
+        <button class="btn btn-azafran" type="submit">Enviar mensaje</button>
+        <p class="aviso" id="avisoForm" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+ 
+<div class="tejido" aria-hidden="true"></div>
+<footer>
+  <div class="contenedor">
+    <span>© <span id="anio"></span> Librerías Andinas OnLine · Perú</span>
+    <span>Libro de Reclamaciones disponible a solicitud</span>
+  </div>
+</footer>
+ 
+<!-- ====== CHATBOT n8n (el widget se inserta solo) ====== -->
+<div class="chat-globo" id="chatGlobo" onclick="abrirChat()">¿Te ayudo a encontrar un libro? 🤖</div>
+ 
+<script>
+/* ================= CONFIGURACIÓN ================= */
+const WHATSAPP = "51992093538";               // 51 = código de Perú
+const CORREO   = "yuriguerra123p@gmail.com";
+const FORMSUBMIT = "https://formsubmit.co/ajax/" + CORREO;
+ 
+/* ================= LIBROS DESTACADOS ================= */
+const libros = [
+  {t:"Los ríos profundos", a:"José María Arguedas", p:45, c:"#1F7A6E"},
+  {t:"La ciudad y los perros", a:"Mario Vargas Llosa", p:59, c:"#C2185B"},
+  {t:"Paco Yunque", a:"César Vallejo", p:18, c:"#E8A33D"},
+  {t:"Tradiciones peruanas", a:"Ricardo Palma", p:39, c:"#52305F"},
+  {t:"Cuentos completos", a:"Julio Ramón Ribeyro", p:69, c:"#231628"},
+  {t:"El mundo es ancho y ajeno", a:"Ciro Alegría", p:49, c:"#7A3B12"}
+];
+document.getElementById("listaLibros").innerHTML = libros.map(l => `
+  <article class="libro">
+    <div class="tapa" style="background:${l.c}"><strong>${l.t}</strong><span>${l.a}</span></div>
+    <div class="libro-info">
+      <span class="precio">S/ ${l.p.toFixed(2)}</span>
+      <button class="pedir" type="button" onclick="pedirLibro('${l.t}', ${l.p})">Pedir</button>
+    </div>
+  </article>`).join("");
+ 
+function pedirLibro(titulo, precio){
+  const texto = `Hola Librerías Andinas OnLine, quiero pedir el libro "${titulo}" (S/ ${precio.toFixed(2)}). ¿Tienen stock?`;
+  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, "_blank");
 }
-
-
-function agregarMensaje(texto, tipo) {
-
-  const contenedor = document.getElementById("chat-messages");
-
-  const mensaje = document.createElement("div");
-
-  mensaje.className =
-    tipo === "bot" ? "mensaje-bot" : "mensaje-user";
-
-  mensaje.innerHTML = texto;
-
-  contenedor.appendChild(mensaje);
-
-  contenedor.scrollTop = contenedor.scrollHeight;
-
+ 
+/* ================= CORREO DEL FORMULARIO (FormSubmit) ================= */
+async function enviarCorreo(datos){
+  try{
+    const r = await fetch(FORMSUBMIT, {
+      method:"POST",
+      headers:{"Content-Type":"application/json","Accept":"application/json"},
+      body:JSON.stringify({...datos, _template:"table", _captcha:"false"})
+    });
+    const j = await r.json();
+    return r.ok && (j.success === true || j.success === "true");
+  }catch(e){ return false; }
 }
-
-
-function responder(numero) {
-
-  const preguntas = {
-
-    1: {
-      pregunta: "¿Qué productos venden?",
-      respuesta:
-        "Vendemos útiles escolares, cuadernos, lapiceros, colores, plumones, artículos de oficina, papel, folders, mochilas y otros productos de librería."
-    },
-
-    2: {
-      pregunta: "¿Cuál es su horario?",
-      respuesta:
-        "Nuestro horario de atención es de lunes a sábado. Puedes consultar el horario exacto mediante nuestro WhatsApp."
-    },
-
-    3: {
-      pregunta: "¿Realizan delivery?",
-      respuesta:
-        "Sí. Podemos coordinar entregas dependiendo de la ubicación y disponibilidad."
-    },
-
-    4: {
-      pregunta: "¿Qué métodos de pago aceptan?",
-      respuesta:
-        "Aceptamos pagos en efectivo y podemos coordinar otros métodos de pago directamente con el cliente."
-    },
-
-    5: {
-      pregunta: "¿Venden útiles escolares?",
-      respuesta:
-        "Sí. Contamos con cuadernos, lápices, lapiceros, colores, reglas, plumones y otros útiles escolares."
-    },
-
-    6: {
-      pregunta: "¿Venden productos de oficina?",
-      respuesta:
-        "Sí. Tenemos papel, folders, archivadores, sobres, lapiceros y diversos artículos de oficina."
-    },
-
-    7: {
-      pregunta: "¿Preparan listas escolares?",
-      respuesta:
-        "Sí. Puedes enviarnos la lista escolar y te ayudaremos a preparar los productos disponibles."
-    },
-
-    8: {
-      pregunta: "¿Entregan boleta o factura?",
-      respuesta:
-        "Puedes consultar sobre la emisión de comprobantes al momento de realizar tu pedido."
-    },
-
-    9: {
-      pregunta: "¿Dónde están ubicados?",
-      respuesta:
-        "Para conocer nuestra ubicación exacta, comunícate con nosotros por WhatsApp al 992 093 538."
-    },
-
-    10: {
-      pregunta: "¿Cómo puedo hacer un pedido?",
-      respuesta:
-        "Puedes realizar tu pedido directamente mediante WhatsApp haciendo clic en el siguiente enlace:<br><br>" +
-        '<a href="https://wa.me/51992093538?text=Hola%20Librer%C3%ADas%20Andinas,%20quiero%20hacer%20un%20pedido." target="_blank">Hacer pedido por WhatsApp</a>'
-    }
-
-  };
-
-
-  const item = preguntas[numero];
-
-  agregarMensaje(item.pregunta, "user");
-
-  setTimeout(function() {
-
-    agregarMensaje(item.respuesta, "bot");
-
-  }, 300);
-
+ 
+/* Abre el chat de n8n desde cualquier botón de la página */
+function abrirChat(){
+  const globo = document.getElementById("chatGlobo");
+  if (globo) globo.remove();
+  const ventana = document.querySelector(".chat-window-wrapper .chat-window");
+  const abierta = ventana && getComputedStyle(ventana).display !== "none";
+  const toggle = document.querySelector(".chat-window-wrapper .chat-window-toggle");
+  if (toggle && !abierta) toggle.click();
 }
-
-
-function enviarFormulario(event) {
-
-  event.preventDefault();
-
-  const nombre =
-    document.getElementById("nombre").value;
-
-  const telefono =
-    document.getElementById("telefono").value;
-
-  const correo =
-    document.getElementById("correo").value;
-
-  const mensaje =
-    document.getElementById("mensaje").value;
-
-
-  const textoWhatsApp =
-    "Hola Librerías Andinas.%0A%0A" +
-    "Nueva consulta desde la página web:%0A%0A" +
-    "Nombre: " + encodeURIComponent(nombre) + "%0A" +
-    "Teléfono: " + encodeURIComponent(telefono) + "%0A" +
-    "Correo: " + encodeURIComponent(correo) + "%0A" +
-    "Mensaje: " + encodeURIComponent(mensaje);
-
-
-  const whatsapp =
-    "https://wa.me/51992093538?text=" + textoWhatsApp;
-
-
-  window.open(whatsapp, "_blank");
-
-
-  const asunto =
-    encodeURIComponent("Consulta desde Librerías Andinas");
-
-  const cuerpo =
-    encodeURIComponent(
-      "Nombre: " + nombre + "\n" +
-      "Teléfono: " + telefono + "\n" +
-      "Correo: " + correo + "\n\n" +
-      "Mensaje:\n" + mensaje
-    );
-
-
-  const email =
-    "mailto:guerrapyuri@gmail.com" +
-    "?subject=" + asunto +
-    "&body=" + cuerpo;
-
-
-  setTimeout(function() {
-
-    window.location.href = email;
-
-  }, 700);
-
-}
-
+ 
+/* ================= FORMULARIO DE CONTACTO ================= */
+document.getElementById("formContacto").addEventListener("submit", async e => {
+  e.preventDefault();
+  const f = e.target, aviso = document.getElementById("avisoForm");
+  const nombre = f.nombre.value.trim(), cel = f.celular.value.trim(),
+        correo = f.correo.value.trim(), msg = f.mensaje.value.trim();
+  if(!nombre || !cel || !msg){ aviso.textContent = "Completa tu nombre, celular y mensaje para enviarlo."; return; }
+ 
+  aviso.textContent = "Enviando…";
+  const ok = await enviarCorreo({
+    _subject:"Mensaje web – " + nombre,
+    Nombre:nombre, Celular:cel, Correo:correo || "No indicado", Mensaje:msg
+  });
+  const texto = `Hola, soy ${nombre} (cel. ${cel}). ${msg}`;
+  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, "_blank");
+  aviso.textContent = ok
+    ? "Mensaje enviado. También abrimos WhatsApp para que lo confirmes."
+    : "Abrimos WhatsApp con tu mensaje. Envíalo para que te respondamos.";
+  if(ok) f.reset();
+});
+ 
+/* Menú móvil y año */
+const menuBtn = document.getElementById("menuBtn"), menu = document.getElementById("menu");
+menuBtn.onclick = () => {
+  const v = menu.classList.toggle("visible");
+  menuBtn.setAttribute("aria-expanded", v);
+};
+menu.querySelectorAll("a").forEach(a => a.onclick = () => menu.classList.remove("visible"));
+document.getElementById("anio").textContent = new Date().getFullYear();
 </script>
-
+ 
+<!-- ====== WIDGET DE CHAT n8n ====== -->
+<script type="module">
+  import { createChat } from "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js";
+ 
+  createChat({
+    webhookUrl: "http://localhost:5678/webhook/b7e6c1a2-5d3f-4c8e-9a10-libreria0001/chat",
+    mode: "window",
+    showWelcomeScreen: false,
+    loadPreviousSession: true,
+    chatInputKey: "chatInput",
+    chatSessionKey: "sessionId",
+    metadata: { sitio: "Librerías Andinas OnLine" },
+    defaultLanguage: "en",
+    initialMessages: [
+      "¡Hola! 🤖📚 Soy Andina, la asistente de Librerías Andinas OnLine.",
+      "¿Qué libro buscas o en qué te puedo ayudar?"
+    ],
+    i18n: {
+      en: {
+        title: "Andina, asistente virtual",
+        subtitle: "Respondemos tus consultas al instante. Lunes a sábado, 9 a. m. a 7 p. m.",
+        footer: "",
+        getStarted: "Nueva conversación",
+        inputPlaceholder: "Escribe tu pregunta…",
+        closeButtonTooltip: "Cerrar chat"
+      }
+    }
+  });
+ 
+  // Oculta el globo de bienvenida cuando el cliente abre el chat
+  document.addEventListener("click", e => {
+    if (e.target.closest(".chat-window-toggle")) {
+      const g = document.getElementById("chatGlobo");
+      if (g) g.remove();
+    }
+  });
+</script>
 </body>
 </html>
+ 
